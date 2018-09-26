@@ -13,13 +13,13 @@ Download Docker for Mac from [here](https://docs.docker.com/docker-for-mac/insta
 
 Create Docker ID from [here](https://hub.docker.com/).
 
-Start Docker for Mac in your pc.
+Start `Docker for Mac` in your pc.
 
 
 ### 1. Creating New Project
 
 ```sh
-git clone https://github.com/lemor303442/docker-rails-starter
+git clone https://github.com/lemor303442/docker_rails_starter_for_mac
 mv docker_rails_starter_for_mac <APP NAME> # only when you want to change the name of app
 cd <APP NAME>
 dbin/rails-new
