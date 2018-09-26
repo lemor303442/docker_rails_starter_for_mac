@@ -1,0 +1,31 @@
+version: '3'
+services:
+  app:
+    build: .
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_HOST: db
+    env_file:
+      - .env
+    stdin_open: true
+    tty: true
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/local/src
+      - /usr/local/src/dbin
+    links:
+      - db
+  db:
+    image: mysql:5.7.22
+    environment:
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - mysql_db:/var/lib/mysql
+    ports:
+      - "3306:3306"
+volumes:
+  mysql_db:
+    driver: local

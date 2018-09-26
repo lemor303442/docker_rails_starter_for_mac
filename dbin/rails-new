@@ -1,0 +1,8 @@
+#! /bin/bash
+
+if [ ! -f "Gemfile" ]; then
+  docker run --rm -v=`pwd`:`pwd` rails:5 rails new `pwd` -f -d mysql --skip-test -B
+  echo -e "\n.env" >> .gitignore
+else
+  echo "Already created."
+fi

@@ -1,0 +1,18 @@
+#! /bin/bash
+
+if [ `docker ps -f ancestor=ruby:2.4.1 -f "name=$directory" -q` ]; then
+  dirName=${PWD##*/}
+
+  if [ `pwd` = "/usr/local/src" ]; then
+    echo "Could not run \`rails-down\`."
+    echo "Run \`exit\` before rails-down."
+  else
+    appId=`docker ps -f ancestor=ruby:2.4.1 -f "name=$directory" -q`
+    volumeId=`docker inspect --format='{{ range .Mounts }}{{ if eq .Type "volume" }}{{ .Name }}{{ end }}{{ end }}' $appId`
+    docker commit $appId `docker ps -f ancestor=ruby:2.4.1 -f "name=$directory" --format {{.Image}}`
+    docker-compose down
+    docker volume rm $volumeId
+  fi
+else
+  echo "Already down."
+fi

@@ -1,0 +1,9 @@
+#! /bin/bash
+
+dirName=${PWD##*/}
+
+docker-compose up -d
+appId=`docker ps -f ancestor=mysql:5.7.22 -f "name=$directory" -q`
+volumeId=`docker inspect --format='{{ range .Mounts }}{{ if eq .Type "volume" }}{{ .Name }}{{ end }}{{ end }}' $appId`
+dbin/down
+docker volume rm $volumeId
